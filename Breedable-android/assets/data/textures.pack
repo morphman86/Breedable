@@ -1,0 +1,94 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+a-blue
+  rotate: false
+  xy: 1, 653
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+a-red
+  rotate: false
+  xy: 1, 327
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+a-yellow
+  rotate: false
+  xy: 327, 653
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+as-blue
+  rotate: false
+  xy: 1, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+b-blue
+  rotate: false
+  xy: 327, 327
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+b-red
+  rotate: false
+  xy: 653, 653
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+b-yellow
+  rotate: false
+  xy: 327, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+bs-blue
+  rotate: false
+  xy: 653, 327
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+l-blue
+  rotate: false
+  xy: 653, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+
+textures2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+l-red
+  rotate: false
+  xy: 1, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+l-yellow
+  rotate: false
+  xy: 327, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1
+ls-blue
+  rotate: false
+  xy: 653, 1
+  size: 324, 324
+  orig: 324, 324
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,45 @@
+package com.morphman.breedable.animal;
+
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+
+public class Animal {
+	
+	private int generation;
+	private Array<Animal> parents;
+	private Array<Trait> traits;
+	
+	public Animal(int generation, Array<Animal> parents) {
+		super();
+		this.generation = generation;
+		if(parents != null){
+			this.parents = parents;
+			this.traits = AnimalHandler.setTraits(this, this.parents);
+		}else{
+			this.traits = AnimalHandler.setTraits(this, null);
+		}
+	}
+	public int getGeneration() {
+		return generation;
+	}
+	public void setGeneration(int generation) {
+		this.generation = generation;
+	}
+	public Array<Animal> getParents() {
+		return parents;
+	}
+	public void setParents(Array<Animal> parents) {
+		this.parents = parents;
+	}
+	public Array<Trait> getTraits() {
+		return traits;
+	}
+	public void setTraits(Array<Trait> traits) {
+		this.traits = traits;
+	}
+	
+	public TextureRegion getTraitTexture(int index){
+		return traits.get(index).getTexture();
+	}
+
+}
