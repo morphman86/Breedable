@@ -1,16 +1,15 @@
 package com.morphman.breedable;
 
 import com.badlogic.gdx.Game;
-import com.morphman.breedable.screen.GameScreen;
 
 public class Breedable extends Game {
 	
-	public static final String VERSION = "0.0.02 Pre-Alpha";
+	public static final String VERSION = "0.0.03 Pre-Alpha";
 	public static final String LOG = "Breedable";
 
 	@Override
 	public void create() {
-		setScreen(new GameScreen(this));
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override

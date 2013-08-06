@@ -3,67 +3,11 @@ textures.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-a-blue
-  rotate: false
-  xy: 1, 653
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-a-red
-  rotate: false
-  xy: 1, 327
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-a-yellow
-  rotate: false
-  xy: 327, 653
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-as-blue
+T1-Eyes-Normal Blue
   rotate: false
   xy: 1, 1
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-b-blue
-  rotate: false
-  xy: 327, 327
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-b-red
-  rotate: false
-  xy: 653, 653
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-b-yellow
-  rotate: false
-  xy: 327, 1
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-bs-blue
-  rotate: false
-  xy: 653, 327
-  size: 324, 324
-  orig: 324, 324
-  offset: 0, 0
-  index: -1
-l-blue
-  rotate: false
-  xy: 653, 1
-  size: 324, 324
-  orig: 324, 324
+  size: 512, 512
+  orig: 512, 512
   offset: 0, 0
   index: -1
 
@@ -71,24 +15,274 @@ textures2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-l-red
+T1-Eyes-Normal Brown
   rotate: false
   xy: 1, 1
-  size: 324, 324
-  orig: 324, 324
+  size: 512, 512
+  orig: 512, 512
   offset: 0, 0
   index: -1
-l-yellow
+
+textures3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Eyes-Normal Green
   rotate: false
-  xy: 327, 1
-  size: 324, 324
-  orig: 324, 324
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
   offset: 0, 0
   index: -1
-ls-blue
+
+textures4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Eyes-Normal Purple
   rotate: false
-  xy: 653, 1
-  size: 324, 324
-  orig: 324, 324
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Eyes-Normal Red
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Blonde Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Cyan Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Green Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Orange Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Silver Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Hair-Strawberry Necklength
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures12.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Head-Beige
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures13.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Head-Brown
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures14.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Head-Golden Brown
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures15.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Head-Pale Beige
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures16.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Head-Red Brown
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures17.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Mouth-Cyan
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures18.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Mouth-Gold
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures19.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Mouth-Green
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures20.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Mouth-Pink
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures21.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Mouth-Red
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures22.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Nose-Broken
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures23.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Nose-Bulbous
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+textures24.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+T1-Nose-Pointy
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
   offset: 0, 0
   index: -1

@@ -6,7 +6,7 @@ public class Trait {
 	
 	private String name;
 	private TextureRegion texture;
-	private int type; //Type of body part, 0 = body, 1=L Arm, 2=R Arm, 3=L Leg, 4=R Leg
+	private int type; //Type of body part, 0 = Head, 1=Hair, 2=Eyes, 3=Mouth, 4=Nose
 	private int tier;
 	
 	public Trait(String name, TextureRegion texture,int type, int tier) {

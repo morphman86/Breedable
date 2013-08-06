@@ -1,13 +1,13 @@
-package com.morphman.breedable.screen;
+package com.morphman.breedable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,48 +15,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Array;
-import com.morphman.breedable.Breedable;
-import com.morphman.breedable.animal.Animal;
-import com.morphman.breedable.animal.AnimalHandler;
 import com.morphman.breedable.animal.TraitHandler;
+import com.morphman.breedable.screen.GameScreen;
 
-public class GameScreen implements Screen {
+public class SplashScreen implements Screen {
 	
-	Animal animal;
-	TextureRegion bodyTexture, rArmTexture, rLegTexture, lArmTexture, lLegTexture;
-	Sprite bodySprite, rArmSprite, rLegSprite, lArmSprite, lLegSprite;
 	Array<Sprite> sprites;
 	SpriteBatch batch;
-	Breedable game;
 	BitmapFont font, invFont;
-	TextButton bReroll, bQuit, bNew;
+	TextButton bNew, bQuit, bJigz;
 	TextureAtlas atlas;
 	Stage stage;
 	Skin skin;
-	
-	static Array<Animal> parents; //TODO Remove, debug tool
-	
-	public GameScreen(Breedable game){
+	Breedable game;
+	Texture splash;
+	Sprite splashSprite;
+
+	public SplashScreen(Breedable game) {
 		this.game = game;
-		parents = new Array<Animal>();
-	}
-	
-	public GameScreen(Breedable game, Animal mother, Animal child){
-		this.game = game;
-		parents.clear();
-		parents.add(mother);
-		parents.add(child);
-	}
-	
-	public static void parentsTemp(){  //TODO Remove, only used for testing
-		if(parents.size == 0){
-			Animal a1 = new Animal(0, null);
-			a1.setTraits(TraitHandler.generatePureTraits(0));
-			Animal a2 = new Animal(0, null);
-			a2.setTraits(TraitHandler.generatePureTraits(2));
-			parents.add(a1); //Mother
-			parents.add(a2); //Father
-		}
 	}
 
 	@Override
@@ -64,39 +40,19 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		stage.act(delta);
+		stage.act(delta);		
 		
-		//Buttons
+		batch.begin();
+			batch.draw(splashSprite, delta, delta);
+		batch.end();
+		
 		batch.begin();
 			stage.draw(); //The text button
 		batch.end();
-		
-		//The characters/animals
-		batch.begin();
-			for(Sprite sprite : sprites){
-				sprite.draw(batch);
-			}	
-		batch.end();
-		
-		//Texts
-		batch.begin();		
-			font.draw(batch, "Father", 150, 100);
-			font.draw(batch, "Mother", 915, 100);
-			//Draw name of body parts on child
-			font.draw(batch, animal.getTraits().get(0).getName(), 10, 700); //Head
-			font.draw(batch, "Generation: " + animal.getGeneration(), 600, 700); //generation
-			font.draw(batch, animal.getTraits().get(1).getName(), 10, 650); //Hair
-			font.draw(batch, animal.getTraits().get(2).getName(), 600, 650); //Eyes
-			font.draw(batch, animal.getTraits().get(3).getName(), 10, 600);  //Mouth
-			font.draw(batch, animal.getTraits().get(4).getName(), 600, 600); //Nose
-		batch.end();
-		
-		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		
 		if(stage == null){
 			stage = new Stage(width, height, true);
 		}
@@ -109,50 +65,50 @@ public class GameScreen implements Screen {
 		style.down = skin.getDrawable("buttonpressed");
 		style.font = invFont;
 		
-		bReroll = new TextButton("New draw", style);
-		bReroll.setWidth(150);
-		bReroll.setHeight(50);
-		bReroll.setOrigin(bReroll.getWidth()/2, bReroll.getHeight()/2);
-		bReroll.setPosition(448, 72);
-		
-		bNew = new TextButton("New game", style);
-		bNew.setWidth(150);
+		bNew = new TextButton("Start game", style);
+		bNew.setWidth(200);
 		bNew.setHeight(50);
-		bNew.setOrigin(bNew.getWidth()/2, bNew.getHeight()/2);
-		bNew.setPosition(524, 22);
+		bNew.setPosition(Gdx.graphics.getWidth()/2-(bNew.getWidth()/2)-205, (Gdx.graphics.getHeight()/2)-300);
+		
+		bJigz = new TextButton("Jigsaw", style);
+		bJigz.setWidth(200);
+		bJigz.setHeight(50);
+		bJigz.setPosition(Gdx.graphics.getWidth()/2-(bJigz.getWidth()/2), (Gdx.graphics.getHeight()/2));
 		
 		bQuit = new TextButton("Quit", style);
 		bQuit.setWidth(100);
 		bQuit.setHeight(50);
-		bQuit.setOrigin(bQuit.getWidth()/2, bQuit.getHeight()/2);
-		bQuit.setPosition(640, 72);
-				
-		stage.addActor(bReroll);
+		bQuit.setPosition(Gdx.graphics.getWidth()/2-(bNew.getWidth()/2)+100, (Gdx.graphics.getHeight()/2)-300);
+		
 		stage.addActor(bNew);
 		stage.addActor(bQuit);
+		stage.addActor(bJigz);
 		
-		bReroll.addListener(new InputListener(){
+		bJigz.addListener(new InputListener(){
 			
+			
+
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
 	        }
 			
 	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	game.setScreen(new GameScreen(game, parents.get(1), animal)); //New roll, child becomes father
+	        	game.setScreen(new JigsawScreen(game)); 
 	        }
 		});
 		
 		bNew.addListener(new InputListener(){
 			
+			
+
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 return true;
 	        }
 			
 	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	game.setScreen(new GameScreen(game)); //New game
+	        	game.setScreen(new GameScreen(game)); 
 	        }
 		});
-		
 		bQuit.addListener(new InputListener(){
 			
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -163,18 +119,13 @@ public class GameScreen implements Screen {
 	        	System.exit(0);
 	        }
 		});
+
 	}
 
 	@Override
 	public void show() {
-		
-		parentsTemp();
-		
-		sprites = new Array<Sprite>();
-		animal = AnimalHandler.addAnimalWithParents(parents);
-		
-		TraitHandler.setTextures(animal, sprites);
-		
+		TraitHandler.setupAtlas();
+		TraitHandler.populateTier1();
 		
 		atlas = new TextureAtlas("data/button.pack");
 		skin = new Skin();
@@ -183,21 +134,28 @@ public class GameScreen implements Screen {
 		invFont = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"), false);
 				
 		batch = new SpriteBatch();
+		
+		splash = new Texture("data/splash.png");
+		splashSprite = new Sprite(splash);
+
 	}
 
 	@Override
 	public void hide() {
-		
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void pause() {
-		
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void resume() {
-		
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -208,7 +166,8 @@ public class GameScreen implements Screen {
 		font.dispose();
 		invFont.dispose();
 		stage.dispose();
-		
+		splash.dispose();
+
 	}
 
 }

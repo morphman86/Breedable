@@ -14,9 +14,9 @@ public class Animal {
 		this.generation = generation;
 		if(parents != null){
 			this.parents = parents;
-			this.traits = AnimalHandler.setTraits(this, this.parents);
+			this.traits = TraitHandler.setTraits(this, this.parents);
 		}else{
-			this.traits = AnimalHandler.setTraits(this, null);
+			this.traits = TraitHandler.setTraits(this, null);
 		}
 	}
 	public int getGeneration() {
