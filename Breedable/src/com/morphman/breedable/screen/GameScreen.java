@@ -21,41 +21,50 @@ import com.morphman.breedable.animal.AnimalHandler;
 import com.morphman.breedable.animal.TraitHandler;
 
 public class GameScreen implements Screen {
+	private static final String LOG = Breedable.LOG + ".GameScreen";
 	
 	Animal animal;
+	Array<Animal> animalHistory;
 	TextureRegion bodyTexture, rArmTexture, rLegTexture, lArmTexture, lLegTexture;
 	Sprite bodySprite, rArmSprite, rLegSprite, lArmSprite, lLegSprite;
 	Array<Sprite> sprites;
 	SpriteBatch batch;
 	Breedable game;
 	BitmapFont font, invFont;
-	TextButton bReroll, bQuit, bNew;
+	TextButton bReroll, bQuit, bNew, bEdit;
 	TextureAtlas atlas;
 	Stage stage;
 	Skin skin;
 	
-	static Array<Animal> parents; //TODO Remove, debug tool
+	static Array<Animal> parents;
 	
 	public GameScreen(Breedable game){
 		this.game = game;
 		parents = new Array<Animal>();
+		animalHistory = new Array<Animal>();
 	}
 	
-	public GameScreen(Breedable game, Animal mother, Animal child){
+	public GameScreen(Breedable game, Array<Animal> animalList, Boolean randomTraits){
 		this.game = game;
+		this.animalHistory = animalList;
 		parents.clear();
-		parents.add(mother);
-		parents.add(child);
+		parents.add(animalList.get(animalList.size-2));
+		parents.add(animalList.get(animalList.size-1));
+		if(!randomTraits){
+			this.animal = animalList.get(animalList.size-1);
+		}
 	}
 	
-	public static void parentsTemp(){  //TODO Remove, only used for testing
+	public void parentsTemp(){  //TODO Remove, only used for testing
 		if(parents.size == 0){
 			Animal a1 = new Animal(0, null);
 			a1.setTraits(TraitHandler.generatePureTraits(0));
 			Animal a2 = new Animal(0, null);
 			a2.setTraits(TraitHandler.generatePureTraits(2));
 			parents.add(a1); //Mother
+			animalHistory.add(a1);
 			parents.add(a2); //Father
+			animalHistory.add(a2);
 		}
 	}
 
@@ -79,9 +88,10 @@ public class GameScreen implements Screen {
 		batch.end();
 		
 		//Texts
-		batch.begin();		
-			font.draw(batch, "Father", 150, 100);
-			font.draw(batch, "Mother", 915, 100);
+		batch.begin();
+			font.draw(batch, "Father", 110, 200);
+			font.draw(batch, "Mother", 1030, 200);
+			font.draw(batch, "Child", Gdx.graphics.getWidth()/2, 150);
 			//Draw name of body parts on child
 			font.draw(batch, animal.getTraits().get(0).getName(), 10, 700); //Head
 			font.draw(batch, "Generation: " + animal.getGeneration(), 600, 700); //generation
@@ -109,6 +119,12 @@ public class GameScreen implements Screen {
 		style.down = skin.getDrawable("buttonpressed");
 		style.font = invFont;
 		
+		bEdit = new TextButton("Edit Parents", style);
+		bEdit.setWidth(216);
+		bEdit.setHeight(50);
+		bEdit.setOrigin(bEdit.getWidth()/2, bEdit.getHeight()/2);
+		bEdit.setPosition(415, 22);
+		
 		bReroll = new TextButton("New draw", style);
 		bReroll.setWidth(150);
 		bReroll.setHeight(50);
@@ -119,17 +135,30 @@ public class GameScreen implements Screen {
 		bNew.setWidth(150);
 		bNew.setHeight(50);
 		bNew.setOrigin(bNew.getWidth()/2, bNew.getHeight()/2);
-		bNew.setPosition(524, 22);
+		bNew.setPosition(Gdx.graphics.getWidth()-bNew.getWidth(), Gdx.graphics.getHeight()-bNew.getHeight());
 		
 		bQuit = new TextButton("Quit", style);
 		bQuit.setWidth(100);
 		bQuit.setHeight(50);
 		bQuit.setOrigin(bQuit.getWidth()/2, bQuit.getHeight()/2);
-		bQuit.setPosition(640, 72);
+		bQuit.setPosition(Gdx.graphics.getWidth()-bQuit.getWidth(), Gdx.graphics.getHeight()-bQuit.getHeight()-bNew.getHeight());
 				
+		stage.addActor(bEdit);
 		stage.addActor(bReroll);
 		stage.addActor(bNew);
 		stage.addActor(bQuit);
+		
+		bEdit.addListener(new InputListener(){
+			
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+	        }
+			
+	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+	        	animalHistory.add(animal);
+	        	game.setScreen(new EditTraitScreen(game, animalHistory)); //Edit the traits
+	        }
+		});
 		
 		bReroll.addListener(new InputListener(){
 			
@@ -138,7 +167,8 @@ public class GameScreen implements Screen {
 	        }
 			
 	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	game.setScreen(new GameScreen(game, parents.get(1), animal)); //New roll, child becomes father
+	        	animalHistory.add(animal);
+	        	game.setScreen(new GameScreen(game, animalHistory, true)); //New roll, child becomes father
 	        }
 		});
 		
@@ -160,7 +190,7 @@ public class GameScreen implements Screen {
 	        }
 			
 	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	System.exit(0);
+	        	Gdx.app.exit();
 	        }
 		});
 	}
@@ -173,7 +203,7 @@ public class GameScreen implements Screen {
 		sprites = new Array<Sprite>();
 		animal = AnimalHandler.addAnimalWithParents(parents);
 		
-		TraitHandler.setTextures(animal, sprites);
+		TraitHandler.setTextures(animal, sprites, true);
 		
 		
 		atlas = new TextureAtlas("data/button.pack");
@@ -208,7 +238,7 @@ public class GameScreen implements Screen {
 		font.dispose();
 		invFont.dispose();
 		stage.dispose();
-		
+		game.dispose();
 	}
 
 }

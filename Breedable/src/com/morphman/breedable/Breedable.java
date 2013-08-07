@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 
 public class Breedable extends Game {
 	
-	public static final String VERSION = "0.0.03 Pre-Alpha";
+	public static final String VERSION = "0.0.11 Pre-Alpha";
 	public static final String LOG = "Breedable";
 
 	@Override

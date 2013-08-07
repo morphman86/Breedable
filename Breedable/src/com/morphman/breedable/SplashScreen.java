@@ -19,6 +19,7 @@ import com.morphman.breedable.animal.TraitHandler;
 import com.morphman.breedable.screen.GameScreen;
 
 public class SplashScreen implements Screen {
+	private static final String LOG = Breedable.LOG + ".SplashScreen";
 	
 	Array<Sprite> sprites;
 	SpriteBatch batch;
@@ -68,34 +69,34 @@ public class SplashScreen implements Screen {
 		bNew = new TextButton("Start game", style);
 		bNew.setWidth(200);
 		bNew.setHeight(50);
-		bNew.setPosition(Gdx.graphics.getWidth()/2-(bNew.getWidth()/2)-205, (Gdx.graphics.getHeight()/2)-300);
+		bNew.setPosition(Gdx.graphics.getWidth()-bNew.getWidth(), Gdx.graphics.getHeight()-bNew.getHeight());
 		
-		bJigz = new TextButton("Jigsaw", style);
-		bJigz.setWidth(200);
-		bJigz.setHeight(50);
-		bJigz.setPosition(Gdx.graphics.getWidth()/2-(bJigz.getWidth()/2), (Gdx.graphics.getHeight()/2));
+//		bJigz = new TextButton("Jigsaw", style);
+//		bJigz.setWidth(200);
+//		bJigz.setHeight(50);
+//		bJigz.setPosition(Gdx.graphics.getWidth()/2-(bJigz.getWidth()/2), (Gdx.graphics.getHeight()/2));
 		
 		bQuit = new TextButton("Quit", style);
 		bQuit.setWidth(100);
 		bQuit.setHeight(50);
-		bQuit.setPosition(Gdx.graphics.getWidth()/2-(bNew.getWidth()/2)+100, (Gdx.graphics.getHeight()/2)-300);
+		bQuit.setPosition(Gdx.graphics.getWidth()-bQuit.getWidth(), Gdx.graphics.getHeight()-bQuit.getHeight()-bNew.getHeight());
 		
 		stage.addActor(bNew);
 		stage.addActor(bQuit);
-		stage.addActor(bJigz);
-		
-		bJigz.addListener(new InputListener(){
-			
-			
-
-			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-	        }
-			
-	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	game.setScreen(new JigsawScreen(game)); 
-	        }
-		});
+//		stage.addActor(bJigz);
+//		
+//		bJigz.addListener(new InputListener(){
+//			
+//			
+//
+//			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+//                return true;
+//	        }
+//			
+//	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+//	        	game.setScreen(new JigsawScreen(game)); 
+//	        }
+//		});
 		
 		bNew.addListener(new InputListener(){
 			
@@ -116,7 +117,7 @@ public class SplashScreen implements Screen {
 	        }
 			
 	        public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-	        	System.exit(0);
+	        	Gdx.app.exit();
 	        }
 		});
 
@@ -125,7 +126,7 @@ public class SplashScreen implements Screen {
 	@Override
 	public void show() {
 		TraitHandler.setupAtlas();
-		TraitHandler.populateTier1();
+		TraitHandler.populateTraits();
 		
 		atlas = new TextureAtlas("data/button.pack");
 		skin = new Skin();
@@ -167,7 +168,7 @@ public class SplashScreen implements Screen {
 		invFont.dispose();
 		stage.dispose();
 		splash.dispose();
-
+		game.dispose();
 	}
 
 }

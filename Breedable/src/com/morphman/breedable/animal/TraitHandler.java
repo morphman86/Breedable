@@ -9,12 +9,16 @@ import com.morphman.breedable.Breedable;
 
 public class TraitHandler{
 
+	private static final String LOG = Breedable.LOG + ".TraitHandler";
 	public static Trait tHead, tHair, tEyes, tMouth, tNose;
 	public static Array<Trait> traits, tier1Head, tier1Hair, tier1Eyes, tier1Mouth, tier1Nose;
 	public static Array<Animal> parents;
 	public static Array<String> textureNames;
 	public static TextureAtlas atlas;
 	
+	/** Method for random generation of traits (based on parents, if any) 
+	 * @param animal The animal to be affected
+	 * @param parents (optional)If you wish to generate traits from parents, add them here*/
 	public static Array<Trait> setTraits(Animal animal, Array<Animal> parents) {
 		
 		traits = new Array<Trait>();
@@ -46,11 +50,15 @@ public class TraitHandler{
 		atlas = new TextureAtlas("data/textures.pack");
 	}
 
-	public static Array<Sprite> setTextures(Animal animal, Array<Sprite> sprites){
+	/** Sets and renders textures of current animal. If haveParents is true and the current animal has parents, it will set the textures of the parent as well. 
+	 * @param animal The animal to render
+	 * @param sprites Array in which you wish to get the rendering sprites in
+	 * @param haveParents (optional)Boolean, true if parents should be rendered*/
+	public static Array<Sprite> setTextures(Animal animal, Array<Sprite> sprites, boolean haveParents){
 		TextureRegion headTexture, eyesTexture, hairTexture, noseTexture, mouthTexture;
 		Sprite headSprite, eyesSprite, hairSprite, noseSprite, mouthSprite;
 		
-		if(animal.getParents() != null){
+		if(animal.getParents() != null && haveParents){
 			
 			headTexture = animal.getParents().get(0).getTraitTexture(0);
 			
@@ -199,6 +207,8 @@ public class TraitHandler{
 		return sprites;
 	}
 	
+	/** Method for generating traits based on parents traits
+	 * @param parents Array of 2 animals to use as parents */
 	public static Array<Trait> generateTraitsFromParents(Array<Animal> parents){
 	
 		
@@ -270,7 +280,9 @@ public class TraitHandler{
 		return traits;
 	}
 	
-public static Array<Trait> generatePureTraits(int index){ //ToDo: Add index depending on what traits you want
+	/** Method for generating an animal with pure traits from one single line of traits
+	 * @param index The index of the pure line of traits */
+	public static Array<Trait> generatePureTraits(int index){ //ToDo: Add index depending on what traits you want
 		Array<Trait> pureTraits = new Array<Trait>();
 		
 		pureTraits.add(tier1Head.get(index));
@@ -282,7 +294,8 @@ public static Array<Trait> generatePureTraits(int index){ //ToDo: Add index depe
 		return pureTraits;
 	}
 
-	public static void populateTier1(){
+	/** Method for populating the different trait arrays. Based on file name, see additional documentation. */
+	public static void populateTraits(){
 		tier1Head = new Array<Trait>();
 		tier1Hair = new Array<Trait>();
 		tier1Eyes = new Array<Trait>();
@@ -292,30 +305,26 @@ public static Array<Trait> generatePureTraits(int index){ //ToDo: Add index depe
 		
 		
 		int atlasSize = atlas.getRegions().size;
-		Gdx.app.log(Breedable.LOG, "Initializing traits: " + atlasSize); //Log the init of textures and how many are loaded
+		Gdx.app.log(LOG, "Initializing traits: " + atlasSize); //Log the init of textures and how many are loaded
 		for(int i = 0; i<atlasSize; i++){
 			String name = atlas.getRegions().get(i).name; 
 			String traitName = name.substring(name.indexOf("-")+1);
-			String prefix = "Tier1 ";
-			String partName = "";
+			traitName = traitName.substring(traitName.indexOf("-")+1);
 			if(name.contains("T1-")){
 				if(name.contains("Head-")){
-					partName = " Head";
-					tHead = new Trait(prefix+traitName+partName, new TextureRegion(atlas.getRegions().get(i)), 0, 1);
+					tHead = new Trait(traitName, new TextureRegion(atlas.getRegions().get(i)), 0, 1);
 					tier1Head.add(tHead);
 				}else if(name.contains("Hair-")){
-					partName = " Hair";
-					tHair = new Trait(prefix+traitName+partName, new TextureRegion(atlas.getRegions().get(i)), 1, 1);
+					tHair = new Trait(traitName, new TextureRegion(atlas.getRegions().get(i)), 1, 1);
 					tier1Hair.add(tHair);
 				}else if(name.contains("Eyes-")){
-					tEyes = new Trait(prefix+traitName+partName, new TextureRegion(atlas.getRegions().get(i)), 2, 1);
+					tEyes = new Trait(traitName, new TextureRegion(atlas.getRegions().get(i)), 2, 1);
 					tier1Eyes.add(tEyes);
 				}else if(name.contains("Mouth-")){
-					partName = " Mouth";
-					tMouth = new Trait(prefix+traitName+partName, new TextureRegion(atlas.getRegions().get(i)), 3, 1);
+					tMouth = new Trait(traitName, new TextureRegion(atlas.getRegions().get(i)), 3, 1);
 					tier1Mouth.add(tMouth);
 				}else if(name.contains("Nose-")){
-					tNose = new Trait(prefix+traitName+partName, new TextureRegion(atlas.getRegions().get(i)), 4, 1);
+					tNose = new Trait(traitName, new TextureRegion(atlas.getRegions().get(i)), 4, 1);
 					tier1Nose.add(tNose);
 				}else{
 					Gdx.app.log(Breedable.LOG, "Texture not loaded: " + name);

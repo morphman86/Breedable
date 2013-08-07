@@ -2,8 +2,10 @@ package com.morphman.breedable.animal;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.morphman.breedable.Breedable;
 
 public class Animal {
+	private static final String LOG = Breedable.LOG + ".Animal";
 	
 	private int generation;
 	private Array<Animal> parents;
@@ -19,6 +21,7 @@ public class Animal {
 			this.traits = TraitHandler.setTraits(this, null);
 		}
 	}
+	
 	public int getGeneration() {
 		return generation;
 	}

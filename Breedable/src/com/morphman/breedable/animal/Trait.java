@@ -1,8 +1,10 @@
 package com.morphman.breedable.animal;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.morphman.breedable.Breedable;
 
 public class Trait {
+	private static final String LOG = Breedable.LOG + ".Trait";
 	
 	private String name;
 	private TextureRegion texture;
